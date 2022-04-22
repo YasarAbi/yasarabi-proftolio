@@ -1,10 +1,26 @@
-import React from 'react'
 import './contact.css'
 import {MdOutlineEmail} from 'react-icons/md'
 import {FaDiscord} from 'react-icons/fa'
 import {ImWhatsapp} from 'react-icons/im'
+import React, { useRef } from 'react';
+import emailjs from 'emailjs-com';
 
-const contant = () => {
+const Contant = () => {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_gdr0bnk', 'template_fpvt2xn', form.current, 'QMO4dZ24DIJLpdtKP')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+
+      e.target.reset();
+    }
+
   return (
     <section id='iletisim'>
       <h5>Konuşma vakti!</h5>
@@ -36,9 +52,9 @@ const contant = () => {
           
         </div>
         {/* İLETİŞİM BÖLÜMÜ SONU */}
-        <form action="">
-          <input type="text" name='İsim' placeholder='Bütün isim ve soyisim' required />
-          <input type="email" name='Eposta' placeholder='Eposta adresin' required/>
+        <form ref={form} onSubmit={sendEmail}>
+          <input type="text" name='name' placeholder='Bütün isim ve soyisim' required />
+          <input type="email" name='email' placeholder='Eposta adresin' required/>
           <textarea name="message" rows="7" placeholder='Mesajın...' required></textarea>
           <button type='submit' className='btn btn-primary'>Gönder</button>
         </form>
@@ -47,4 +63,4 @@ const contant = () => {
   )
 }
 
-export default contant
+export default Contant
