@@ -1,5 +1,6 @@
 {
   "name": "yasarabi-proftolio",
+  "homepage": "https://cv.yasarabi.me/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
